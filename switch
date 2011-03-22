@@ -1,0 +1,9 @@
+#!/bin/bash
+export PATH=/bin:/usr/bin:/usr/sbin
+if [ $(kernel-config show | grep max | awk '{ print  $3 }') -eq 500 ] 
+then
+kernel-config limits 250 1000 > /dev/null
+else
+kernel-config limits 125 500 > /dev/null
+fi
+kernel-config show | grep max | awk '{ print $3 }'
